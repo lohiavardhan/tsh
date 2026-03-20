@@ -1,10 +1,10 @@
 #ifndef _TSH_H
 #define _TSH_H
 
-char *secret = "1234";
+char *secret = "123456789";
 char *cb_host = NULL;
 
-#define SERVER_PORT 1234
+#define SERVER_PORT 4444
 short int server_port = SERVER_PORT;
 
 #define CONNECT_BACK_HOST  "localhost"
