@@ -73,7 +73,6 @@ int main( int argc, char **argv )
     struct sockaddr_in server_addr;
     struct sockaddr_in client_addr;
     struct hostent *client_host;
-
     while ((opt = getopt(argc, argv, "s:p:c::")) != -1) {
         switch (opt) {
             case 'p':
@@ -95,7 +94,6 @@ int main( int argc, char **argv )
                 break;
         }
     }
-
 
     /* fork into background */
 
@@ -125,6 +123,7 @@ int main( int argc, char **argv )
     {
         close( n );
     }
+   
 
 	if (cb_host == NULL) {
     	/* create a socket */

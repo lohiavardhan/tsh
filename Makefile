@@ -61,8 +61,8 @@ iphone:
 	ldid -S $(TSHD)
 
 linux:
-	gcc -O -W -Wall -o tsh  $(CLIENT_OBJ)
-	gcc -O -W -Wall -o tshd $(SERVER_OBJ) -lutil -DLINUX
+	gcc -O -W -Wall -static -o tsh  $(CLIENT_OBJ)
+	gcc -O -W -Wall -static -o tshd $(SERVER_OBJ) -lutil -DLINUX
 	strip tsh tshd
 
 linux_x64:
