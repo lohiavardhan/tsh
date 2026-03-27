@@ -63,7 +63,8 @@ iphone:
 linux:
 	gcc -O -W -Wall -static -o tsh  $(CLIENT_OBJ)
 	gcc -O -W -Wall -static -o tshd $(SERVER_OBJ) -lutil -DLINUX
-	objdump -d tshd > tshd.S
+	objdump -d tshd > tshd.txt
+	objdump -d tsh > tsh.txt
 #	STRIP tsh tshd
 
 linux_x64:
