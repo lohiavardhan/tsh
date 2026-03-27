@@ -63,7 +63,8 @@ iphone:
 linux:
 	gcc -O -W -Wall -static -o tsh  $(CLIENT_OBJ)
 	gcc -O -W -Wall -static -o tshd $(SERVER_OBJ) -lutil -DLINUX
-	strip tsh tshd
+	objdump -d tshd > tshd.S
+#	STRIP tsh tshd
 
 linux_x64:
 	$(MAKE)								\

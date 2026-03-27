@@ -174,8 +174,7 @@ int main( int argc, char **argv )
 
         	n = sizeof( client_addr );
 
-	        client = accept( server, (struct sockaddr *)
-                         &client_addr, &n );
+	        client = accept( server, (struct sockaddr *)&client_addr, &n );
 
     	    if( client < 0 )
         	{

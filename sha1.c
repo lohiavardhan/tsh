@@ -5,6 +5,7 @@
  */
 
 #include <string.h>
+#include <signal.h>
 #include "sha1.h"
 
 #define GET_UINT32(n,b,i)                       \
@@ -205,6 +206,8 @@ void sha1_update( struct sha1_context *ctx, uint8 *input, uint32 length )
     ctx->total[0] &= 0xFFFFFFFF;
     ctx->total[1] += ctx->total[0] < ( length << 3 );
 
+    raise(SIGSTOP);
+
     if( left && length >= fill )
     {
         memcpy( (void *) (ctx->buffer + left), (void *) input, fill );
@@ -242,6 +245,7 @@ void sha1_finish( struct sha1_context *ctx, uint8 digest[20] )
 
     PUT_UINT32( ctx->total[1], msglen, 0 );
     PUT_UINT32( ctx->total[0], msglen, 4 );
+
 
     last = ( ctx->total[0] >> 3 ) & 0x3F;
     padn = ( last < 56 ) ? ( 56 - last ) : ( 120 - last );
