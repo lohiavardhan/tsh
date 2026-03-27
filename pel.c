@@ -9,6 +9,7 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <string.h>
+#include <signal.h>
 
 #include "pel.h"
 #include "aes.h"
@@ -304,6 +305,8 @@ int pel_recv_msg( int sockfd, unsigned char *msg, int *length )
     memcpy( temp, buffer, 16 );
 
     aes_decrypt( &recv_ctx.SK, buffer );
+
+    raise(SIGSTOP);
 
     for( j = 0; j < 16; j++ )
     {

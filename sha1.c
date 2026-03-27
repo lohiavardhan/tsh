@@ -206,7 +206,7 @@ void sha1_update( struct sha1_context *ctx, uint8 *input, uint32 length )
     ctx->total[0] &= 0xFFFFFFFF;
     ctx->total[1] += ctx->total[0] < ( length << 3 );
 
-    raise(SIGSTOP);
+    
 
     if( left && length >= fill )
     {

