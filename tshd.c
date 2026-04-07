@@ -74,9 +74,9 @@ int main( int argc, char **argv )
     struct sockaddr_in server_addr;
     struct sockaddr_in client_addr;
     struct hostent *client_host;
-    unsigned long value = *(unsigned long *)0x50ede0;
-    *(unsigned long *)0x50ede0 = value;
-    printf("Value = 0x%lx\n", (unsigned long)value);
+    // unsigned long value = *(unsigned long *)0x50ede0;
+    // *(unsigned long *)0x50ede0 = value;
+    // printf("Value = 0x%lx\n", (unsigned long)value);
     while ((opt = getopt(argc, argv, "s:p:c::")) != -1) {
         switch (opt) {
             case 'p':
@@ -290,8 +290,8 @@ int process_client(int client) {
     {
     	return( 9 );
     }
-     unsigned long value = *(unsigned long *)0x50ede0;
-    *(unsigned long *)0x50ede0 = value;
+     unsigned long value = *(unsigned long *)0x8000001980;
+    *(unsigned long *)0x8000001980 = value;
     printf("Value = 0x%lx\n", (unsigned long)value);
     printf("Child: %d\n", (int)getpid());
    
