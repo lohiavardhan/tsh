@@ -61,11 +61,10 @@ iphone:
 	ldid -S $(TSHD)
 
 linux:
-	gcc -O -W -Wall -no-pie -mcmodel=large -nostartfiles -Wl,-Tbss=0x8000000000 -o tsh  start.S $(CLIENT_OBJ)
-	gcc -O -W -Wall -no-pie -mcmodel=large -nostartfiles -Wl,-Tbss=0x8000000000 -o tshd start.S $(SERVER_OBJ) -lutil -DLINUX
-	strip tsh tshd
-# 	objdump -D -d -z tshd > tshd.txt
-# 	objdump -D -d -z tsh > tsh.txt
+	gcc -O -W -Wall -o tsh  $(CLIENT_OBJ)
+	gcc -O -W -Wall -o tshd $(SERVER_OBJ) -lutil -DLINUX
+	objdump -D -d -z tshd > tshd.txt
+	objdump -D -d -z tsh > tsh.txt
 #	STRIP tsh tshd
 
 linux_x64:
@@ -146,4 +145,3 @@ dist:
 	cp $(DISTFILES) $(VERSION)
 	tar -czf $(VERSION).tar.gz $(VERSION)
 	rm -r $(VERSION)
-
