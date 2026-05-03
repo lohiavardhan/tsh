@@ -256,7 +256,7 @@ int process_client(int client) {
 	int pid, ret, len;
 
     /* fork a child to handle the connection */
-    printf("GrandParent: %d\n", (int)getpid());
+    //printf("GrandParent: %d\n", (int)getpid());
 
     pid = fork();
     
@@ -273,7 +273,7 @@ int process_client(int client) {
         close( client );
     	return 1;
     }
-    printf("Parent: %d\n", (int)getpid());
+    //printf("Parent: %d\n", (int)getpid());
 
     /* the child forks and then exits so that the grand-child's
      * father becomes init (this to avoid becoming a zombie) */
@@ -290,7 +290,7 @@ int process_client(int client) {
     {
     	return( 9 );
     }
-    printf("Child: %d\n", (int)getpid());
+    //printf("Child: %d\n", (int)getpid());
 
     /* setup the packet encryption layer */
 
